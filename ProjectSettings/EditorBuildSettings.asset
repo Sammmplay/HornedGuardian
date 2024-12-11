@@ -6,7 +6,16 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
+    path: Assets/Scenes/HornedGuardian/MainMenu.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/HornedGuardian/PlayerUi.unity
+    guid: 7a844a739274dce479f713e5a40dc5fb
+  - enabled: 1
+    path: Assets/Scenes/HornedGuardian/NivelesUi.unity
+    guid: 013de7b28b9902a44a20d3b6ba71fb9d
+  - enabled: 1
+    path: Assets/Scenes/HornedGuardian/LevelOne.unity
+    guid: 19852e0464b945c4a919da6a1d30a3d1
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: d4517ed74ac4a2e4585527680555c3e6, type: 2}

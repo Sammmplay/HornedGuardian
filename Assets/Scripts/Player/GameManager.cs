@@ -1,21 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 public class GameManager : MonoBehaviour
 {
-    float _playerSpeed;
-    float _playerDamage;
+    public static GameManager Instance;
 
-    private void Start() {
-        //obtener la informacion del guardian seleccionado 
-        int _guardianId = PlayerPrefs.GetInt("SelectedSpeed");
-        _playerSpeed = PlayerPrefs.GetFloat("SelectedDamage");
+    public GameObject[] _guardians;
 
-        
-    }
-
-    void SetupPlayer() {
-        
+    public int _selecteGuardian = -1;
+    public int _selectedLevelIndex = -1;
+    private void Awake() {
+        if (Instance == null) {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        } else Destroy(gameObject);
     }
 }
+

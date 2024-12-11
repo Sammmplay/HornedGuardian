@@ -2,33 +2,62 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static Cinemachine.DocumentationSortingAttribute;
 //using LeanTweenType = LeanTweenType;
 public class ControlUi : MonoBehaviour
 {
-
+    public static ControlUi Instance;
     public LeanTweenType easeType;
     #region Menu Principal ambas escenas
     [SerializeField] RectTransform _panelMaiMenu;
     [SerializeField] RectTransform _panelOptions;
+    [SerializeField] RectTransform _panelSelectPlayer;
+    [SerializeField] RectTransform _levels;
     [SerializeField] Image[] _buttonsImages;
     
     [SerializeField] Vector3 _posMainOptions;
     
     [SerializeField] float _timeLTMainOptions;
     [SerializeField] float _timeLTParpadeo;
+    private void Awake() {
+        if(Instance == null) {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }else Destroy(gameObject);
+    }
     private void Start() {
         int indexScene = SceneManager.GetActiveScene().buildIndex;
         switch (indexScene) {
             case 0:
                 //sucesos de entrada para la escena 0 (MainMenu)
                 _panelMaiMenu.gameObject.SetActive(true);
+                _panelOptions.gameObject.SetActive(false);
+                _panelSelectPlayer.gameObject.SetActive(false);
+                _levels.gameObject.SetActive(false);
                 if (_buttonsImages != null) {
                     AnimacionConLeanTwin();
                 }break;
                 case 1:
                 //sucesos de entrada para la escena 1(PLayerSelect)
+                _panelSelectPlayer.gameObject.SetActive(true);
                 _panelMaiMenu.gameObject.SetActive(false);
-                    break;
+                _panelOptions.gameObject.SetActive(false);
+                
+                _levels.gameObject.SetActive(false);
+
+                break;
+                case 2:
+                _panelMaiMenu.gameObject.SetActive(false);
+                _panelOptions.gameObject.SetActive(false);
+                _panelSelectPlayer.gameObject.SetActive(false);
+                _levels.gameObject.SetActive(true);
+                break;
+            case > 3:
+                _panelMaiMenu.gameObject.SetActive(false);
+                _panelOptions.gameObject.SetActive(false);
+                _panelSelectPlayer.gameObject.SetActive(false);
+                _levels.gameObject.SetActive(false);
+                break;
             default:
                 break;
         }
