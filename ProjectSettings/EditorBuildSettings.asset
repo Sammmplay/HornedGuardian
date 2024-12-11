@@ -18,4 +18,7 @@ EditorBuildSettings:
     path: Assets/Scenes/HornedGuardian/LevelOne.unity
     guid: 19852e0464b945c4a919da6a1d30a3d1
   m_configObjects:
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 50eef16886eb0a54ca188cda6a1422e0, type: 2}
+    com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 6cbc0ab36bff0664b96411157a2124ce, type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: d4517ed74ac4a2e4585527680555c3e6, type: 2}
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 1696ecd8e13967b428bf0dcd1c503a11, type: 3}
