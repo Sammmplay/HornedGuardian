@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "com.unity.adaptiveperformance": "5.1.0",
     "com.unity.collab-proxy": "2.6.0",
     "com.unity.feature.characters-animation": "1.0.0",
     "com.unity.feature.cinematic": "1.0.0",
