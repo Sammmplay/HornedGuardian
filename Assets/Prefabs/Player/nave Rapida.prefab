@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8594916740809020127}
   - component: {fileID: 852986762125455890}
   m_Layer: 0
-  m_Name: nave rapida
+  m_Name: nave Rapida
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -114,7 +114,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 48
+  m_Constraints: 52
   m_CollisionDetection: 2
 --- !u!65 &7769047986669105103
 BoxCollider:
@@ -182,12 +182,12 @@ MonoBehaviour:
   _ballPrefab: {fileID: 3462402258251903039, guid: 641dbbcae08b4c240acf2aa6af98bd5f, type: 3}
   _ballTransform: {fileID: 8316969143058931063}
   _speed: 8
-  _damage: 0
+  _damage: 10
   _masAngleRotation: -45
   _menorAngleRotation: 45
   _angleSpeed: 90
   _timer: 0
-  _recollding: 0.5
+  _recollding: 1
   _onFire: 1
   _input: {x: 0, y: 0}
 --- !u!1 &4672192784366620617
@@ -215,7 +215,7 @@ Transform:
   m_GameObject: {fileID: 4672192784366620617}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.091, z: 0.956}
+  m_LocalPosition: {x: 0, y: 0, z: 1.26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -265,7 +265,7 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 0, g: 0.1678834, b: 1, a: 1}
+  m_Color: {r: 0.8113208, g: 0.24184978, b: 0.21813813, a: 1}
   m_Intensity: 150
   m_Range: 50
   m_SpotAngle: 30
