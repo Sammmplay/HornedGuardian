@@ -498,13 +498,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -0.181
       objectReference: {fileID: 0}
+    - target: {fileID: 4194948029584494276, guid: 55c4888771b795b4c901da037b146830, type: 3}
+      propertyPath: _sounds.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4194948029584494276, guid: 55c4888771b795b4c901da037b146830, type: 3}
+      propertyPath: _sounds.Array.data[5]._clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 164c68652996ed74ab60e16ae269569a, type: 3}
+    - target: {fileID: 4194948029584494276, guid: 55c4888771b795b4c901da037b146830, type: 3}
+      propertyPath: _sounds.Array.data[5]._loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4194948029584494276, guid: 55c4888771b795b4c901da037b146830, type: 3}
+      propertyPath: _sounds.Array.data[5]._name
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4194948029584494276, guid: 55c4888771b795b4c901da037b146830, type: 3}
+      propertyPath: _sounds.Array.data[5]._volume
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5328640881698290652, guid: 55c4888771b795b4c901da037b146830, type: 3}
       propertyPath: m_Name
       value: ControllerMainMenuCanvasUI
       objectReference: {fileID: 0}
     - target: {fileID: 6713565081581899983, guid: 55c4888771b795b4c901da037b146830, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8085716804572218440, guid: 55c4888771b795b4c901da037b146830, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -886,18 +906,16 @@ MonoBehaviour:
   _instanciaTransform: {fileID: 1488461482}
   _filas: 4
   _Columnas: 5
-  _limitXmin: -6.5
-  _limitXmax: 13
-  _limitZDistance: 1
-  _distanceTraveldZ: 0
-  _moveSpeed: 1
+  _limitXmax: 7
+  _limitXmin: -6
+  _distanceZ: 1
+  _timeMovingX: 10
+  _timeMovingZ: 3
   _spaceInX: 2
   _spaceInZ: 3
-  _cronometro: 0
-  _posicionEjeX: 0
-  _activeUp: 0
+  _targetPosition: 0
+  _movingToRigth: 0
   enemies: []
-  _movementDirection: {x: 1, y: 0}
 --- !u!4 &1687114690
 Transform:
   m_ObjectHideFlags: 0

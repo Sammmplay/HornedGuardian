@@ -1,32 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class ManagerEnemi : MonoBehaviour
 {
     [SerializeField] GameObject[] _prefabEnemy;
     [SerializeField] Transform _instanciaTransform;
+
     [SerializeField] int _filas = 3;
     [SerializeField] int _Columnas = 5;
-    [SerializeField] float _limitXmin = -8f;
-    [SerializeField] float _limitXmax = 8f;
-    [SerializeField] float _limitZDistance = 1f; //distancai que debe recorrer en el eje Z
-    [SerializeField] float _distanceTraveldZ = 0f; // distancia recorrida en Z
-    [SerializeField] float _moveSpeed = 1f;
+
+    [SerializeField] float _limitXmax = 13f; // Límite máximo en X
+    [SerializeField] float _limitXmin = -6f; // Límite mínimo en X
+    [SerializeField] float _distanceZ = 1;
+    [SerializeField] float _timeMovingX;
+    [SerializeField] float _timeMovingZ;
     [SerializeField] float _spaceInX;
     [SerializeField] float _spaceInZ;
-    public float _cronometro;
-    [SerializeField] float _posicionEjeX;
-    [SerializeField] bool _activeUp = false;
+    [SerializeField] float _targetPosition;
+
+    [SerializeField] bool _movingToRigth = false;
+
     [SerializeField] List<EnemyController> enemies = new List<EnemyController>();
-    [SerializeField] Vector2 _movementDirection = Vector2.right;
 
     private void Start() {
         InstantiatEnemy();
+        MoveX();
     }
     private void Update() {
-        MoveEbeny();
-        
+        //MoveEnemy();
+
+
     }
     void InstantiatEnemy() {
         for (int i = 0; i < _filas; i++) {
@@ -42,32 +47,27 @@ public class ManagerEnemi : MonoBehaviour
             }
         }
     }
-    public void MoveEbeny() {
-
-        //_instanciaTransform.position += (Vector3)_movementDirection * _moveSpeed * Time.deltaTime;
-        foreach(EnemyController enemy in enemies) {
-            if (enemy == null) continue; // ignorar enemigos destruidos
-            float xPos = enemy.transform.localPosition.x;
+    public void MoveX() {
+        float targetX = _movingToRigth ? _limitXmax : _limitXmin;
+        LeanTween.moveLocalX(_instanciaTransform.gameObject, targetX, _timeMovingX).setOnComplete(() => {
+            MoveZ();
+        });
+           
+        
             
-            if (!_activeUp) {
-                _distanceTraveldZ = 0;
-                enemy.transform.localPosition += (Vector3)_movementDirection * Time.deltaTime;
-                if (xPos > _limitXmax || xPos < _limitXmin) {
-                    _movementDirection *= -1;
-                    _activeUp = true;
-                }
-                _posicionEjeX = xPos;
-            } else {
-                
-                enemy.transform.localPosition -= Vector3.forward  * Time.deltaTime;
-                // acumular la distancia recorrida en Z       
-                _distanceTraveldZ += Time.deltaTime;
-                if (_distanceTraveldZ > _limitZDistance) {
-                    _activeUp = false;
-                    
-                }
-            }
-            
-        }
     }
+
+    void MoveZ() {
+        float targetZ = _instanciaTransform.localPosition.z - _distanceZ;
+        LeanTween.moveLocalZ(_instanciaTransform.gameObject, targetZ, _timeMovingZ).setOnComplete(() => {
+            _movingToRigth = !_movingToRigth;
+            MoveX();
+        });
+           
+
+    }
+    
 }
+
+   
+

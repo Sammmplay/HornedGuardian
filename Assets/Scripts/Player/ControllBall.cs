@@ -14,6 +14,10 @@ public class ControllBall : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision collision) {
+        if (collision.collider.GetComponent<EnemyController>()) {
+            EnemyController _contacto= collision.collider.GetComponent<EnemyController>();
+            _contacto.PerderVida(PlayerController.instance._damage);
+        }
         if (collision != null) {
             Destroy(gameObject);
         }
