@@ -19,13 +19,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float _recollding;
     [SerializeField] bool _onFire = true;
     [SerializeField] Vector2 _input;
-
+    [SerializeField] bool _isFire;
+    
     Rigidbody _rb;
     private void Awake() {
         if (instance == null) {
 
             instance = this;
         } else Destroy(gameObject);
+        var inputAction = new PlayerInputActions();
+
     }
     private void Start() {
         _rb = GetComponent<Rigidbody>();
@@ -34,6 +37,14 @@ public class PlayerController : MonoBehaviour
         _timer += Time.deltaTime;
         if (_timer  >_recollding) {
             _onFire = true;
+        }
+        if (transform.position.y != 0) {
+            Vector3 newPosition = transform.position;
+            newPosition.y = 0;
+            transform.position = newPosition;
+        }
+        if (_isFire) {
+            disparar(); ;
         }
     }
     private void FixedUpdate() {
@@ -65,8 +76,12 @@ public class PlayerController : MonoBehaviour
     }
 
     public void OnFire(InputValue value) {
-        if (_onFire && _timer > _recollding) {
-            GameObject _ball = Instantiate(_ballPrefab,_ballTransform.position,Quaternion.identity);
+        _isFire = value.isPressed;
+
+    }
+    void disparar() {
+        if (_timer > _recollding && _onFire) {
+            GameObject _ball = Instantiate(_ballPrefab, _ballTransform.position, Quaternion.identity);
             Destroy(_ball, 5);
             _timer = 0;
             _onFire = false;
