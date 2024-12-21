@@ -29232,7 +29232,7 @@ GameObject:
   - component: {fileID: 1036459936181606482}
   - component: {fileID: 8562969875427794229}
   m_Layer: 0
-  m_Name: Ball prismatic
+  m_Name: BulletNaveLenta
   m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34071,7 +34071,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 324f86feff0556041ac8f8f050af5efb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 15
+  _speed: 10
 --- !u!135 &1036459936181606482
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -34079,7 +34079,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6328413644285348393}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 1560575207a7b4f27bcd4ab2aeb2e3a1, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

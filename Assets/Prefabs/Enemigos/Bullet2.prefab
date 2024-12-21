@@ -4864,6 +4864,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ballSpeed: 5
+  _timeLifeObject: 6
   _scrip: {fileID: 0}
 --- !u!54 &9131213528033414369
 Rigidbody:

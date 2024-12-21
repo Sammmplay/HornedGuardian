@@ -4,22 +4,25 @@ public class ControllBall : MonoBehaviour
 {
     public float _speed;
     private float _damage;
+    Rigidbody _rb;
     private void Start() {
+        _rb = GetComponent<Rigidbody>();
         _damage = PlayerController.instance._damage;
     }
     private void Update() {
-        transform.position += Vector3.forward * _speed * Time.deltaTime ;
+        transform.position += Vector3.forward * _speed * Time.deltaTime;
+
     }
 
-    private void OnCollisionEnter(Collision collision) {
-        if (collision.collider.GetComponent<EnemyController>()) {
-            EnemyController _contacto= collision.collider.GetComponent<EnemyController>();
+    private void OnTriggerEnter(Collider other) {
+        if (other.GetComponent<EnemyController>()) {
+            EnemyController _contacto = other.GetComponent<EnemyController>();
             _contacto.PerderVida(PlayerController.instance._damage);
             Destroy(gameObject);
-        }else if (collision.collider.CompareTag("Bunker")) {
+        } else if (other.CompareTag("Bunker")) {
             Destroy(gameObject);
         }
-        Debug.Log(collision.gameObject.name);
+        Debug.Log(other.gameObject.name);
     }
 }
 

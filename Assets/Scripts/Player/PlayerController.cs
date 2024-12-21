@@ -27,7 +27,6 @@ public class PlayerController : MonoBehaviour
 
             instance = this;
         } else Destroy(gameObject);
-        var inputAction = new PlayerInputActions();
 
     }
     private void Start() {

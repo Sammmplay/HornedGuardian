@@ -883,7 +883,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 852986762125455890, guid: 65b392fa6d1d0f4489b374f8320c019a, type: 3}
       propertyPath: _recollding
-      value: 0.3
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 2558651599992049809, guid: 65b392fa6d1d0f4489b374f8320c019a, type: 3}
       propertyPath: m_Name
@@ -891,7 +891,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2868804082559234083, guid: 65b392fa6d1d0f4489b374f8320c019a, type: 3}
       propertyPath: m_CollisionDetection
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3366981362185852429, guid: 65b392fa6d1d0f4489b374f8320c019a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -933,26 +933,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7769047986669105103, guid: 65b392fa6d1d0f4489b374f8320c019a, type: 3}
-      propertyPath: m_Size.x
-      value: 0.8915255
-      objectReference: {fileID: 0}
-    - target: {fileID: 7769047986669105103, guid: 65b392fa6d1d0f4489b374f8320c019a, type: 3}
-      propertyPath: m_Center.x
-      value: 0.015018702
-      objectReference: {fileID: 0}
-    - target: {fileID: 7769047986669105103, guid: 65b392fa6d1d0f4489b374f8320c019a, type: 3}
-      propertyPath: m_Center.y
-      value: 0.0015659928
-      objectReference: {fileID: 0}
-    - target: {fileID: 7769047986669105103, guid: 65b392fa6d1d0f4489b374f8320c019a, type: 3}
-      propertyPath: m_Center.z
-      value: 0.00009250641
-      objectReference: {fileID: 0}
-    - target: {fileID: 7769047986669105103, guid: 65b392fa6d1d0f4489b374f8320c019a, type: 3}
-      propertyPath: m_Material
+    - target: {fileID: 8594916740809020127, guid: 65b392fa6d1d0f4489b374f8320c019a, type: 3}
+      propertyPath: m_Camera
       value: 
-      objectReference: {fileID: 13400000, guid: 1560575207a7b4f27bcd4ab2aeb2e3a1, type: 2}
+      objectReference: {fileID: 270603412}
+    - target: {fileID: 8594916740809020127, guid: 65b392fa6d1d0f4489b374f8320c019a, type: 3}
+      propertyPath: m_UIInputModule
+      value: 
+      objectReference: {fileID: 2055974277}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1096,8 +1084,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefabEnemy:
   - {fileID: 2078849577107246560, guid: 975c1b23b9c105c4494c6eab7c0539ea, type: 3}
-  - {fileID: 2199663607918526392, guid: 5c1c7a3ceb67f47458388e52794704f0, type: 3}
   - {fileID: 762775507418856792, guid: d31ba5bcd522d6545b6495f9b920b691, type: 3}
+  - {fileID: 762775507418856792, guid: c9c5475141d954f4b9e72ea86d1517b2, type: 3}
   - {fileID: 3395637997709606295, guid: 4092e7e6f32fb804b9211e026b1221ba, type: 3}
   _instanciaTransform: {fileID: 1488461482}
   _limites:
@@ -1110,7 +1098,6 @@ MonoBehaviour:
   _timeMovingZ: 0.002
   _spaceInX: 2
   _spaceInZ: 3
-  _targetPosition: 0
   distanceX: 6
   distanceZ: 1
   _movinInX: 1

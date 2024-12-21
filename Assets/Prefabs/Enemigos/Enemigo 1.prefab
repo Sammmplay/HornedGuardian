@@ -148,14 +148,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d759fc01b4e079b4f93e830613d8f01e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefabProyectil: {fileID: 251852153754492050, guid: fb37cacffbaaf2340ad458672a182e88, type: 3}
+  _prefabProyectil: {fileID: 251852153754492050, guid: 9a1949846239d9045941b5df40669304, type: 3}
   _punteroBullet: {fileID: 1967242654595711279}
   _life: 0
   _maxLife: 50
   _damage: 4
-  _timeInstanceBulletMax: 8
-  _timeInstanceBulletMin: 4
+  _timeInstanceBulletMax: 20
+  _timeInstanceBulletMin: 10
   _distanceRaycast: 4
+  _managerEnemy: {fileID: 0}
 --- !u!1 &2597993805368615598
 GameObject:
   m_ObjectHideFlags: 0

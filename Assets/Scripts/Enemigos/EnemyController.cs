@@ -35,6 +35,11 @@ public class EnemyController : MonoBehaviour
     }
 
     private void Update() {
+        if(gameObject.transform.position.y != 0) {
+            Vector3 newPosition = transform.position;
+            newPosition.y = 0;
+            transform.position = newPosition;
+        }
         if (!PuedeAtaquar()) return;
             Disparos();
             
