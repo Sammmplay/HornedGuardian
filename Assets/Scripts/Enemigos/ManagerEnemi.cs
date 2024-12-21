@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -9,16 +10,16 @@ public class ManagerEnemi : MonoBehaviour
     [SerializeField] GameObject[] _prefabEnemy;
     [SerializeField] Transform _instanciaTransform;
     [SerializeField] Transform[] _limites;
-
+    [SerializeField] Transform _playerTransform;
     [SerializeField] int _filas = 3;
     [SerializeField] int _Columnas = 5;
 
+    [SerializeField] int _countEnemis;
 
     [SerializeField] float _timeMovingX;
     [SerializeField] float _timeMovingZ;
     [SerializeField] float _spaceInX;
     [SerializeField] float _spaceInZ;
-
     [SerializeField] float distanceX = 6;
     [SerializeField] float distanceZ = 2;
 
@@ -28,10 +29,14 @@ public class ManagerEnemi : MonoBehaviour
 
     [SerializeField] Vector3 targetPosicionInZ;
     [SerializeField] Vector2 _moveDirection = Vector2.right;
+
     [SerializeField] List<EnemyController> enemies = new List<EnemyController>();
 
     private void Start() {
+        _playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         InstantiatEnemy();
+        _countEnemis = enemies.Count;
+        
         //MoveX();
     }
     private void Update() {
@@ -46,23 +51,21 @@ public class ManagerEnemi : MonoBehaviour
         }
         for (int i = 0; i < enemies.Count; i++) {
             if (_movinInX && !_movingInZ) {
-                enemies[i].transform.position += (Vector3)_moveDirection * _timeMovingX;
+                enemies[i].transform.position += (Vector3)_moveDirection * (_timeMovingX/100);
                 if (enemies[i].transform.position.x > _limites[0].transform.position.x
-                    || enemies[i].transform.position.x < _limites[1].transform.position.x) {
-                    _moveDirection = -_moveDirection;
-                    if (enemies[i].transform.position.z <= _limites[2].transform.position.z) {
-                        _movinInX = true;
-                        _movingInZ = false;
-                    } else {
+                    || enemies[i].transform.position.x <= _limites[1].transform.position.x) {
+                    
+                    if (enemies[i].transform.position.z >= _limites[2].transform.position.z) {
+                        DistanceRespectPlayer();
+                        targetPosicionInZ.z -= distanceZ;
                         _movinInX = false;
                         _movingInZ = true;
+                        
                     }
-                    
-
-                    targetPosicionInZ = enemies[i].transform.position + Vector3.back * distanceZ;
+                    _moveDirection = -_moveDirection;
                 }
             } else if(_movingInZ && !_movinInX){
-                enemies[i].transform.position += Vector3.back * _timeMovingZ;
+                enemies[i].transform.position += Vector3.back * (_timeMovingZ/100);
                 if (enemies[i].transform.position.z < targetPosicionInZ.z) {
                     _movingInZ = false;
                     _movinInX = true;
@@ -93,6 +96,22 @@ public class ManagerEnemi : MonoBehaviour
                 });
             }
         }
+    }
+    void DistanceRespectPlayer() {
+        float closeDistance = Mathf.Infinity;
+        for (int i = 0; i < enemies.Count; i++) {
+            float distancePlayer = Vector3.Distance(enemies[i].transform.position, _playerTransform.position);
+            if (distancePlayer < closeDistance) {
+                closeDistance = distancePlayer;
+                targetPosicionInZ = enemies[i].transform.position;
+            }
+
+        }
+    }
+    //controlador para la velocidad de de movimiento de los enemigos
+    public void AumentarVelocidad(float speedEnemiesX, float speedEnemiesZ) {
+        _spaceInX += speedEnemiesX;
+        _spaceInZ += speedEnemiesZ;
     }
     /*public void MoveX() {
         float targetX = _movingToRigth ? _limitXmax : _limitXmin;
