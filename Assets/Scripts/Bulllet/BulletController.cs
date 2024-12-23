@@ -23,6 +23,7 @@ public class BulletController : MonoBehaviour
         else if (collision.collider.CompareTag("Bunker")) {
             LifeBunker _scriptBunker = collision.collider.GetComponent<LifeBunker>();
             if (_scriptBunker != null) {
+                _scriptBunker.AnimacionGolpeShield();
                 _scriptBunker.PerderVida(_damage);
             } else {
                 Debug.Log("No se encontro LifeBunker");

@@ -20,9 +20,7 @@ public class LifeBunker : MonoBehaviour
         }
         
     }
-    private void OnTriggerEnter(Collider other) {
-        
-    }
+
     public void AnimacionGolpeShield() {
         _anim.SetTrigger("Golpe");
     }

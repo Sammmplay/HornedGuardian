@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class ManagerSounds : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public class ManagerSounds : MonoBehaviour
         if (Instance == null) {
             Instance = this;
         } else Destroy(gameObject);
-
+        
         //crear diccionario para los sonidos
         _audioSource = new Dictionary<int, AudioSource>();
         foreach (var sound in _sounds) {

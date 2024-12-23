@@ -13,6 +13,7 @@ public class ControlUi : MonoBehaviour
     [SerializeField] RectTransform _panelOptions;
     [SerializeField] RectTransform _panelSelectPlayer;
     [SerializeField] RectTransform _levels;
+    [SerializeField] RectTransform _panelInGame;
     [SerializeField] Image[] _buttonsImages;
     
     [SerializeField] Vector3 _posMainOptions;
@@ -82,6 +83,8 @@ public class ControlUi : MonoBehaviour
     }
     public void PlayGame() {
         // cargar la escena 1 
+        _panelInGame.gameObject.SetActive(false);   
+
         SceneManager.LoadScene(1);
     }
     public void Opciones() {
