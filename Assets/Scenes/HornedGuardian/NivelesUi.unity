@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 42eaf2c5dbb13dc498f15df5a5b05fda, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -253,158 +253,30 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1892930147}
-    - target: {fileID: 503815377608614519, guid: 55c4888771b795b4c901da037b146830, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SelectLevel
-      objectReference: {fileID: 0}
-    - target: {fileID: 503815377608614519, guid: 55c4888771b795b4c901da037b146830, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: SelecteionControll, Assembly-CSharp
-      objectReference: {fileID: 0}
     - target: {fileID: 711007929944678504, guid: 55c4888771b795b4c901da037b146830, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1892930147}
-    - target: {fileID: 711007929944678504, guid: 55c4888771b795b4c901da037b146830, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SelectLevel
-      objectReference: {fileID: 0}
-    - target: {fileID: 711007929944678504, guid: 55c4888771b795b4c901da037b146830, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: SelecteionControll, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 759701665188609874, guid: 55c4888771b795b4c901da037b146830, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3356963955630169024, guid: 55c4888771b795b4c901da037b146830, type: 3}
-      propertyPath: _playerSpawnPoint
-      value: 
-      objectReference: {fileID: 1536451755}
     - target: {fileID: 3388832941686125698, guid: 55c4888771b795b4c901da037b146830, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1892930147}
-    - target: {fileID: 3388832941686125698, guid: 55c4888771b795b4c901da037b146830, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SelectLevel
-      objectReference: {fileID: 0}
-    - target: {fileID: 3388832941686125698, guid: 55c4888771b795b4c901da037b146830, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: SelecteionControll, Assembly-CSharp
-      objectReference: {fileID: 0}
     - target: {fileID: 4321922589762773036, guid: 55c4888771b795b4c901da037b146830, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1892930147}
-    - target: {fileID: 4321922589762773036, guid: 55c4888771b795b4c901da037b146830, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SelectLevel
-      objectReference: {fileID: 0}
-    - target: {fileID: 4321922589762773036, guid: 55c4888771b795b4c901da037b146830, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: SelecteionControll, Assembly-CSharp
-      objectReference: {fileID: 0}
     - target: {fileID: 4385755819145911580, guid: 55c4888771b795b4c901da037b146830, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1892930147}
-    - target: {fileID: 4385755819145911580, guid: 55c4888771b795b4c901da037b146830, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SelectLevel
-      objectReference: {fileID: 0}
-    - target: {fileID: 4385755819145911580, guid: 55c4888771b795b4c901da037b146830, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: SelecteionControll, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 4488009435230534146, guid: 55c4888771b795b4c901da037b146830, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4488009435230534146, guid: 55c4888771b795b4c901da037b146830, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4488009435230534146, guid: 55c4888771b795b4c901da037b146830, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4488009435230534146, guid: 55c4888771b795b4c901da037b146830, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4488009435230534146, guid: 55c4888771b795b4c901da037b146830, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4488009435230534146, guid: 55c4888771b795b4c901da037b146830, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5328640881698290652, guid: 55c4888771b795b4c901da037b146830, type: 3}
       propertyPath: m_Name
       value: ControllerMainMenuCanvasUI
       objectReference: {fileID: 0}
-    - target: {fileID: 6664670625436412520, guid: 55c4888771b795b4c901da037b146830, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6664670625436412520, guid: 55c4888771b795b4c901da037b146830, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6664670625436412520, guid: 55c4888771b795b4c901da037b146830, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6664670625436412520, guid: 55c4888771b795b4c901da037b146830, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6664670625436412520, guid: 55c4888771b795b4c901da037b146830, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6664670625436412520, guid: 55c4888771b795b4c901da037b146830, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6713565081581899983, guid: 55c4888771b795b4c901da037b146830, type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 1840862098}
     - target: {fileID: 6713565081581899983, guid: 55c4888771b795b4c901da037b146830, type: 3}
       propertyPath: m_UIInputModule
       value: 
       objectReference: {fileID: 500232377}
-    - target: {fileID: 7813530537081708638, guid: 55c4888771b795b4c901da037b146830, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7813530537081708638, guid: 55c4888771b795b4c901da037b146830, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7813530537081708638, guid: 55c4888771b795b4c901da037b146830, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7813530537081708638, guid: 55c4888771b795b4c901da037b146830, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7813530537081708638, guid: 55c4888771b795b4c901da037b146830, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7813530537081708638, guid: 55c4888771b795b4c901da037b146830, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8146926454209813915, guid: 55c4888771b795b4c901da037b146830, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -487,20 +359,10 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a1b412be20155424e97f4c85fb33b2c6, type: 3}
---- !u!4 &1536451755 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2752202780393008617, guid: a1b412be20155424e97f4c85fb33b2c6, type: 3}
-  m_PrefabInstance: {fileID: 1536451754}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1557879247 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7860542751591690501, guid: 55c4888771b795b4c901da037b146830, type: 3}
   m_PrefabInstance: {fileID: 784618983}
-  m_PrefabAsset: {fileID: 0}
---- !u!20 &1840862098 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 3774365697255302352, guid: a1b412be20155424e97f4c85fb33b2c6, type: 3}
-  m_PrefabInstance: {fileID: 1536451754}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1879621772
 GameObject:
