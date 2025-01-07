@@ -5,7 +5,7 @@ public class BulletController : MonoBehaviour
     [SerializeField] float _ballSpeed;
     float _damage;
     [SerializeField] float _timeLifeObject = 8;
-    [SerializeField] EnemyController _scrip;
+    EnemyController _scrip;
     private void Start() {
         
         _scrip = GetComponentInParent<EnemyController>();
@@ -16,19 +16,25 @@ public class BulletController : MonoBehaviour
         transform.position += Vector3.back * _ballSpeed * Time.deltaTime;
     }
     private void OnCollisionEnter(Collision collision) {
-        if (collision.collider.CompareTag("Player")) {
-            
+        
+    }
+    private void OnTriggerEnter(Collider other) {
+        if (other.CompareTag("Player")) {
+            if(other.GetComponent<PlayerController>()!= null) {
+                other.GetComponent<PlayerController>().DestructionObject();
+            }
             Destroy(gameObject);
-        }
-        else if (collision.collider.CompareTag("Bunker")) {
-            LifeBunker _scriptBunker = collision.collider.GetComponent<LifeBunker>();
+        } else if (other.CompareTag("Bunker")) {
+            Debug.Log("ColisionConBunker");
+            LifeBunker _scriptBunker = other.GetComponent<LifeBunker>();
             if (_scriptBunker != null) {
                 _scriptBunker.AnimacionGolpeShield();
                 _scriptBunker.PerderVida(_damage);
+                other.GetComponent<AudioSource>().Play();
             } else {
                 Debug.Log("No se encontro LifeBunker");
             }
-            
+
             Destroy(gameObject);
         }
     }

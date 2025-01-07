@@ -7,73 +7,68 @@ using UnityEngine;
 
 public class ManagerEnemi : MonoBehaviour
 {
+    public static ManagerEnemi Instance;
     [SerializeField] GameObject[] _prefabEnemy;
     [SerializeField] Transform _instanciaTransform;
-    [SerializeField] Transform[] _limites;
     [SerializeField] Transform _playerTransform;
+    [SerializeField] Collider _colLimitZ;
     [SerializeField] int _filas = 3;
     [SerializeField] int _Columnas = 5;
 
-    [SerializeField] int _countEnemis;
-
-    [SerializeField] float _timeMovingX;
-    [SerializeField] float _timeMovingZ;
     [SerializeField] float _spaceInX;
     [SerializeField] float _spaceInZ;
     [SerializeField] float distanceX = 6;
     [SerializeField] float distanceZ = 2;
 
-
-    [SerializeField] bool _movinInX = true;
-    [SerializeField] bool _movingInZ = false;
-
+    [Header("Movimiento enemies")]
+    [SerializeField] float _limitXMax;
+    [SerializeField] float _limitXMin;
+    [SerializeField] float _limitZ;
+    [SerializeField] float _distanceZ;
+    public float _velocity;
+    public float _timeZ;
+    [SerializeField] bool _starGame;
+    [SerializeField] bool _movingToRigth = true;
+    [SerializeField] bool _movingInX;
+    public bool _movingInZ;
+    
     [SerializeField] Vector3 targetPosicionInZ;
     [SerializeField] Vector2 _moveDirection = Vector2.right;
-
+    public int _countEnemies;
     [SerializeField] List<EnemyController> enemies = new List<EnemyController>();
-
+    private void Awake() {
+        if(Instance == null) {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        } else {
+            Destroy(gameObject);
+        }
+    }
     private void Start() {
-        _playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-        InstantiatEnemy();
-        _countEnemis = enemies.Count;
-        
-        //MoveX();
+        _movingInX = true;
+        LeanTween.init(800);
+        GameObject _colZ = GameObject.Find("LimiteZ");
     }
     private void Update() {
-        //MoveEnemy();
 
-        //MovingInx();
         for (int j = 0; j < enemies.Count; j++) {
-            if (enemies[j] == null) {
+            if (enemies[j] == null) { 
                 enemies.RemoveAt(j);
                 break;
             }
         }
-        for (int i = 0; i < enemies.Count; i++) {
-            if (_movinInX && !_movingInZ) {
-                enemies[i].transform.position += (Vector3)_moveDirection * (_timeMovingX/100);
-                if (enemies[i].transform.position.x > _limites[0].transform.position.x
-                    || enemies[i].transform.position.x <= _limites[1].transform.position.x) {
-                    
-                    if (enemies[i].transform.position.z >= _limites[2].transform.position.z) {
-                        DistanceRespectPlayer();
-                        targetPosicionInZ.z -= distanceZ;
-                        _movinInX = false;
-                        _movingInZ = true;
-                        
-                    }
-                    _moveDirection = -_moveDirection;
-                }
-            } else if(_movingInZ && !_movinInX){
-                enemies[i].transform.position += Vector3.back * (_timeMovingZ/100);
-                if (enemies[i].transform.position.z < targetPosicionInZ.z) {
-                    _movingInZ = false;
-                    _movinInX = true;
-                }
+        if(_starGame){
+            if (_movingInX) {
+            MoveX();
             }
         }
     }
-    void InstantiatEnemy() {
+    public void ComenzarNivel() {
+        _playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        StartCoroutine(InstantiateEnemiesSmoothly());
+    }
+
+    IEnumerator InstantiateEnemiesSmoothly() {
         for (int i = 0; i < _filas; i++) {
             for (int j = 0; j < _Columnas; j++) {
                 //seleccionamos el prefab segun la fila
@@ -81,55 +76,49 @@ public class ManagerEnemi : MonoBehaviour
                 //posicion de instancia
                 Vector3 spawPosition = new Vector3(j * _spaceInX, 0, i * _spaceInZ) + _instanciaTransform.position;
                 //instanciar el enemigo
-                GameObject enemy = Instantiate(_seletPrefab, spawPosition, Quaternion.Euler(0, 180, 0));
+                GameObject enemy = Instantiate(_seletPrefab, spawPosition, _seletPrefab.transform.rotation);
                 //agregar a la lista enemigos
                 enemies.Add(enemy.GetComponent<EnemyController>());
+                
+                yield return new WaitForSeconds(0.1f);
+                if (enemies.Count == _filas * _Columnas) {
+                    _starGame = true;
+                    _countEnemies = enemies.Count;
+                    GameObject _colZ = GameObject.Find("LimiteZ");
+                    _colLimitZ = _colZ.GetComponent<Collider>();
+                }
             }
         }
     }
 
-    void MovingInx() {
+
+    public void MoveX() {
         for (int i = 0; i < enemies.Count; i++) {
-            if (_movinInX && enemies[i]!=null) {
-                enemies[i].transform.LeanMoveLocalX(enemies[i].transform.localPosition.x + distanceX, _timeMovingX).setOnComplete(() => {
-                    _movinInX = false;
-                });
+            float targetX = _movingToRigth ? _limitXMax : _limitXMin;
+            enemies[i].transform.position = Vector3.MoveTowards(enemies[i].transform.position,
+                new Vector3(targetX, enemies[i].transform.position.y, enemies[i].transform.position.z), _velocity * Time.deltaTime);
+
+            //cambiar al movimiento en z si se alcanza los limites 
+            if(Mathf.Abs(enemies[i].transform.position.x - (_movingToRigth ? _limitXMax : _limitXMin)) < 0.01) {
+                
+                _movingToRigth = !_movingToRigth;
+                if(_movingInZ) {
+                    _movingInX = false;
+                    AnimationRespectZ();
+                    break;
+                }
             }
         }
     }
-    void DistanceRespectPlayer() {
-        float closeDistance = Mathf.Infinity;
-        for (int i = 0; i < enemies.Count; i++) {
-            float distancePlayer = Vector3.Distance(enemies[i].transform.position, _playerTransform.position);
-            if (distancePlayer < closeDistance) {
-                closeDistance = distancePlayer;
-                targetPosicionInZ = enemies[i].transform.position;
+    public void AnimationRespectZ() {
+        Debug.Log("dentreo de los limites de Z ");
+        for(int i = 0;i < enemies.Count; i++) {
+            if (enemies[i] != null) {
+                float targetZ = enemies[i].transform.position.z - distanceZ;
+                LeanTween.moveLocalZ(enemies[i].gameObject, targetZ, _timeZ).setOnComplete(() => { _movingInX = true; });
             }
-
         }
     }
-    //controlador para la velocidad de de movimiento de los enemigos
-    public void AumentarVelocidad(float speedEnemiesX, float speedEnemiesZ) {
-        _spaceInX += speedEnemiesX;
-        _spaceInZ += speedEnemiesZ;
-    }
-    /*public void MoveX() {
-        float targetX = _movingToRigth ? _limitXmax : _limitXmin;
-        LeanTween.moveLocalX(_instanciaTransform.gameObject, targetX, _timeMovingX).setOnComplete(() => {
-            MoveZ();
-        });    
-    }*/
-
-    /*void MoveZ() {
-        float targetZ = _instanciaTransform.localPosition.z - _distanceZ;
-        LeanTween.moveLocalZ(_instanciaTransform.gameObject, targetZ, _timeMovingZ).setOnComplete(() => {
-            _movingToRigth = !_movingToRigth;
-            MoveX();
-        });
-           
-
-    }*/
-    
 }
 
    

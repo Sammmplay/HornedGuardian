@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7769047986669105103}
   - component: {fileID: 8594916740809020127}
   - component: {fileID: 852986762125455890}
+  - component: {fileID: 5353663206319180336}
   m_Layer: 0
   m_Name: nave Rapida
   m_TagString: Player
@@ -113,9 +114,9 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 52
+  m_Constraints: 0
   m_CollisionDetection: 1
 --- !u!65 &7769047986669105103
 BoxCollider:
@@ -181,19 +182,121 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ballPrefab: {fileID: 3462402258251903039, guid: 0e6ec4e03ffa61542b5a171977c30ae1, type: 3}
-  _ballTransform: {fileID: 8316969143058931063}
+  _destruction: {fileID: 2515244570134305854, guid: 1f1dfa6b4234a754c839bf7617cf1fdf, type: 3}
+  _efects: {fileID: 2940816642054939154}
+  _ballTransform:
+  - {fileID: 8316969143058931063}
   _speed: 8
-  _damage: 10
+  _damage: 5
   _masAngleRotation: -45
   _menorAngleRotation: 45
   _angleSpeed: 90
   _timer: 0
-  _recollding: 0.8
-  _limitMinX: -9
-  _limitMaxX: 9
+  _recollding: 0.3
+  _limitMinX: -11
+  _limitMaxX: 11
+  _explocionForce: 10
+  _explosionRadius: 2
+  _upwardModifier: 1
   _onFire: 1
   _isFire: 0
   _input: {x: 0, y: 0}
+--- !u!82 &5353663206319180336
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2558651599992049809}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 93f154c42f7791441a537ebfebd97f82, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &2940816642054939154
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,12 +307,12 @@ GameObject:
   m_Component:
   - component: {fileID: 6514725260044124974}
   m_Layer: 0
-  m_Name: Efectos
+  m_Name: EfectosDestruccion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6514725260044124974
 Transform:
   m_ObjectHideFlags: 0
@@ -304,13 +407,13 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0.8113208, g: 0.24184978, b: 0.21813813, a: 1}
-  m_Intensity: 150
-  m_Range: 50
+  m_Intensity: 100
+  m_Range: 7.15
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 0.442

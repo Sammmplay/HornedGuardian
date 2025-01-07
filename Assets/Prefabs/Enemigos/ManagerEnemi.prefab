@@ -77,27 +77,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _prefabEnemy:
-  - {fileID: 2078849577107246560, guid: 975c1b23b9c105c4494c6eab7c0539ea, type: 3}
-  - {fileID: 762775507418856792, guid: d31ba5bcd522d6545b6495f9b920b691, type: 3}
+  - {fileID: 762775507418856792, guid: 5c1c7a3ceb67f47458388e52794704f0, type: 3}
   - {fileID: 762775507418856792, guid: c9c5475141d954f4b9e72ea86d1517b2, type: 3}
   - {fileID: 3395637997709606295, guid: 4092e7e6f32fb804b9211e026b1221ba, type: 3}
+  - {fileID: 3523760525192656699, guid: a9f404d92bf93ac4693de80473ae2ad2, type: 3}
   _instanciaTransform: {fileID: 1679386428597916170}
-  _limites:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   _playerTransform: {fileID: 0}
+  _colLimitZ: {fileID: 0}
   _filas: 4
   _Columnas: 5
-  _countEnemis: 0
-  _timeMovingX: 0.5
-  _timeMovingZ: 0.3
   _spaceInX: 2
   _spaceInZ: 3
   distanceX: 6
   distanceZ: 1
-  _movinInX: 1
-  _movingInZ: 0
+  _limitXMax: 10
+  _limitXMin: -10
+  _limitZ: 6
+  _distanceZ: 1
+  _velocity: 2.45
+  _timeZ: 2
+  _starGame: 0
+  _movingToRigth: 1
+  _movingInX: 1
+  _movingInZ: 1
   targetPosicionInZ: {x: 0, y: 0, z: 0}
   _moveDirection: {x: 1, y: 0}
   enemies: []

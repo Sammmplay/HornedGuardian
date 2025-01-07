@@ -7,7 +7,8 @@ public class SelecteionControll : MonoBehaviour
 {
     public void SelectGuardian(int _guardianIndex) {
         GameManager.Instance._selecteGuardian = _guardianIndex;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        LoadEscena.Instance.LoadEscenaActual(SceneManager.GetActiveScene().buildIndex + 1);
+        
     }
     public void SelectLevel(int _levelIndex) {
         GameManager.Instance._selectedLevelIndex = _levelIndex;
@@ -16,12 +17,12 @@ public class SelecteionControll : MonoBehaviour
     void LoadLevel() {
         if (GameManager.Instance._selectedLevelIndex < 0) {
             Debug.LogWarning("Nivel inaccesible");
-        }
+        }       
         if (GameManager.Instance._selecteGuardian < 0) {
             Debug.LogWarning("Guardian inaccesible ");
         }
         if(GameManager.Instance._selecteGuardian != -1 && GameManager.Instance._selectedLevelIndex != -1) {
-            SceneManager.LoadScene(GameManager.Instance._selectedLevelIndex+2);
+            LoadEscena.Instance.LoadEscenaActual(GameManager.Instance._selectedLevelIndex + 2);
         }
     }
 }

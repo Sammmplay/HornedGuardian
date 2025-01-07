@@ -17,12 +17,13 @@ public class ControllBall : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         if (other.GetComponent<EnemyController>()) {
             EnemyController _contacto = other.GetComponent<EnemyController>();
-            _contacto.PerderVida(PlayerController.instance._damage);
+            if (_contacto != null) {
+                _contacto.PerderVida(_damage);
+            }
             Destroy(gameObject);
         } else if (other.CompareTag("Bunker")) {
             Destroy(gameObject);
         }
-        Debug.Log(other.gameObject.name);
     }
 }
 

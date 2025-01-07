@@ -22,6 +22,8 @@ public class ManagerSounds : MonoBehaviour
     public UnityEngine.Audio.AudioMixer _audioMixer;
     [SerializeField] Slider _sliderMusic;
     [SerializeField] Slider _sliderEfects;
+    [SerializeField] float _multiplyScale = 1.3f;
+    [SerializeField] float _animationDuration = 0.2f;
     private void Awake() {
         if (Instance == null) {
             Instance = this;
@@ -56,12 +58,26 @@ public class ManagerSounds : MonoBehaviour
         }
         PlaySound(name);
     }
+    // Controles De volumen
     public void SetMusicVolume(float volume) {
-        _sliderMusic.value = volume;
-        _audioMixer.SetFloat("MUSIC", Mathf.Log10(volume) * 20);
+        
+        _audioMixer.SetFloat("MUSIC",(volume));
     }
     public void SetEffectsVolume(float volume) {
-        _sliderEfects.value = volume;
+
         _audioMixer.SetFloat("EFECTS", Mathf.Log10(volume) * 20);
+    }
+
+    public void AdjustScaleMusic() {
+        LeanTween.scale(_sliderMusic.gameObject, Vector3.one * _multiplyScale, _animationDuration);
+    }
+    public void RestartScaleMusic() {
+        LeanTween.scale(_sliderMusic.gameObject, Vector3.one, _animationDuration);
+    }
+    public void AdjustScaleEfects() {
+        LeanTween.scale(_sliderEfects.gameObject, Vector3.one * _multiplyScale, _animationDuration);
+    }
+    public void RestartScaleEfects() {
+        LeanTween.scale(_sliderEfects.gameObject, Vector3.one, _animationDuration);
     }
 }

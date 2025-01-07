@@ -9,9 +9,6 @@ public class LifeBunker : MonoBehaviour
     public float _lifeBunker;
     public Slider _sliderLife;
     [SerializeField] Animator _anim;
-
-    public float fresnelPower;
-    public float frecuency;
     private void Start() {
         _sliderLife.maxValue = _lifemaxBunker;
         _sliderLife.value = _lifemaxBunker;

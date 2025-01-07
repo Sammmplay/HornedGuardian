@@ -44,6 +44,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d03f142c4c0baa439d563481fd61a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2030971792061345630
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3581811458800049035}
+  m_Layer: 0
+  m_Name: TransformPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3581811458800049035
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030971792061345630}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8802140552489581729}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3352226403351704826
 GameObject:
   m_ObjectHideFlags: 0
@@ -76,6 +107,7 @@ Transform:
   m_Children:
   - {fileID: 3599463060441218030}
   - {fileID: 3099324490160278011}
+  - {fileID: 3581811458800049035}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6680399522830169584
@@ -91,11 +123,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _guardians:
-  - {fileID: 2617731672099142334, guid: a466fc1af3836cf4ba85f73182683976, type: 3}
-  - {fileID: 2617731672099142334, guid: 2fa6699cd54abda4f916bd147571dbe9, type: 3}
-  - {fileID: 2617731672099142334, guid: a8cebb421fb3389429d941021b7ce69d, type: 3}
+  - {fileID: 6006775179573193363, guid: dc96af36e2c3a864ebdf7b5b426d72a5, type: 3}
+  - {fileID: 2558651599992049809, guid: 65b392fa6d1d0f4489b374f8320c019a, type: 3}
+  - {fileID: 2102890601325124686, guid: 40f4ca28d99059a43bfe5e8dd98b0223, type: 3}
+  _spawPositionPlayer: {fileID: 3581811458800049035}
   _selecteGuardian: -1
   _selectedLevelIndex: -1
+  _lifes:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _lifeCurrent: []
+  _cronometro: {fileID: 0}
+  _textCronometro: {fileID: 0}
+  _textTimeGame: {fileID: 0}
+  _time: 0
+  _puntCurrentText: {fileID: 0}
+  _puntMaxText: {fileID: 0}
+  _puntCurrent: 0
+  _puntMax: 0
+  _starCount: 0
 --- !u!1 &9159919735028555888
 GameObject:
   m_ObjectHideFlags: 0

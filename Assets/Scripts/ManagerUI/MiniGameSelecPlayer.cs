@@ -88,11 +88,12 @@ public class MiniGameSelecPlayer : MonoBehaviour
         }
     }
     private void OnTriggerExit2D(Collider2D collision) {
-        if (collision ) {
+        if (collision != null) {
             Button _boton = collision.GetComponentInParent<Button>();
-            PointerEventData _pointEvent = new PointerEventData(EventSystem.current);
-            ExecuteEvents.Execute(_boton.gameObject, _pointEvent, ExecuteEvents.pointerExitHandler);
-
+            if(_boton != null){
+                PointerEventData _pointEvent = new PointerEventData(EventSystem.current);
+                ExecuteEvents.Execute(_boton.gameObject, _pointEvent, ExecuteEvents.pointerExitHandler);
+            }
         }
     }
 }
