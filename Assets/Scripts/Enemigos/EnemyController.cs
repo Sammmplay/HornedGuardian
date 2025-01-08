@@ -9,6 +9,8 @@ public class EnemyController : MonoBehaviour {
     public static EnemyController instance;
     [SerializeField] GameObject _prefabProyectil;
     [SerializeField] GameObject _destruction;
+    public float _addVelocityX { get; private set; } = 0.2f;
+    public float _addTimeZ { get; private set; } = 0.015f;
     Slider _slider;
     [SerializeField] ParticleSystem _efects;
     [SerializeField] GameObject[] _efectsGameObject;
@@ -72,15 +74,17 @@ public class EnemyController : MonoBehaviour {
             _meshR.enabled = false;
             AudioSource _source = GetComponent<AudioSource>();
             _source.Play();
-            if(ManagerEnemi.Instance._countEnemies <= 0) {
+            ManagerEnemi.Instance.Addvelocity(_addVelocityX,_addTimeZ);
+            if (ManagerEnemi.Instance._countEnemies <= 0) {
+                Debug.Log("N hay mas naves");
                 ControlUi.Instance._congratulations.GetChild(0).gameObject.SetActive(true);
-                GameManager.Instance.TiempoHecho();
-                Time.timeScale = 0;
+                GameManager.Instance.WinGame();
             }
             DestruccionEfect();
 
         }
     }
+
     void Disparos() {
         _timeNextFire -= Time.deltaTime;
         if (_timeNextFire <= 0) {
@@ -91,6 +95,8 @@ public class EnemyController : MonoBehaviour {
     void InstanciarProyectiil() {
         GameObject _instanciaProyectil = Instantiate(_prefabProyectil, _punteroBullet);
         _instanciaProyectil.transform.localPosition = Vector3.zero;
+        BulletController _scrip = _instanciaProyectil.GetComponent<BulletController>();
+        _scrip._damage = _damage;
     }
     bool PuedeAtaquar() {
 
@@ -114,9 +120,12 @@ public class EnemyController : MonoBehaviour {
             GameObject _efect1 = Instantiate(_efectsGameObject[0], transform.position, Quaternion.identity);
             _efect1.GetComponent<ParticleSystem>().Play();
             GameObject _efect2 = Instantiate(_efectsGameObject[1], transform.position, Quaternion.identity);
+            if (_efect2) {
+                Destroy(_efect2,2f);
+            }
             _efect2.GetComponent<ParticleSystem>().Play();
             GameObject _efect3 = Instantiate(_efectsGameObject[2], transform.position, Quaternion.identity);
-            
+            Destroy(_efect3,1.5f);
         }
         Destroy(gameObject, 0.5f);
     }

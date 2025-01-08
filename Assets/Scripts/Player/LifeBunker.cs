@@ -27,7 +27,7 @@ public class LifeBunker : MonoBehaviour
         _lifeBunker=_sliderLife.value;
         if (_lifeBunker <= 0) {
             //Haremos la animacion de destruccion aca
-            Destroy(gameObject/*, tiempo de animacion antes de destruir*/);
+            gameObject.SetActive(false);
         }
     }
 }

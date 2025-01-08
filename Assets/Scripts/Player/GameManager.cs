@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 public class GameManager : MonoBehaviour
@@ -54,17 +55,46 @@ public class GameManager : MonoBehaviour
 
     #region Sistema de vidas
     public void PerderVida() {
-        if (_lifes[_selecteGuardian].transform.childCount > 0) {
-            Transform lastChild = _lifes[_selecteGuardian].transform.GetChild(_lifes[_selecteGuardian].transform.childCount - 1);
-            //desactiva el ultimo objeto
-            lastChild.gameObject.SetActive(false);
-            if (lastChild.childCount > 0) {
-                Invoke("InstantiateSelectedGuardian", 1.5f);
+
+        if (_lifeCurrent.Length > 0) {
+            int starIndex = 0;
+            int endIndex = 0;
+            switch (_selecteGuardian) {
+                case 0:
+                    starIndex = 2;
+                    endIndex = 0;
+                    break;
+                case 1:
+                    starIndex = 5;
+                    endIndex = 3;
+                    break;
+                case 2:
+                    starIndex = 8;
+                    endIndex = 6;
+                    break;
+
+                default:
+                    Debug.Log("Indice de guardian Invalido");
+                    return;
+                        
             }
+            for (int i = starIndex; i >= endIndex; i--) {
+                if (_lifeCurrent[i].activeSelf) {
+                    _lifeCurrent[i].SetActive(false);
+                    if (_lifeCurrent[i].activeSelf) {
+                        Invoke("ResetPLayer", 2.0f);
+                    }
+                    break;
+                }
+            }
+        } else {
+            Debug.Log("No hay vidas disponibles ");
         }
     }
     #endregion
-
+    void ResetPlayer() {
+        InstantiateSelectedGuardian();
+    }
     #region Cronometro
     void StarCount() {
         if (_starCount) {
@@ -108,6 +138,18 @@ public class GameManager : MonoBehaviour
         _puntCurrentText.text = 0.ToString();
         _starCount = true;
         LoadPunt();
+    }
+    public void WinGame() {
+        Debug.Log("WinGame");
+        StartCoroutine(TiempoDeespera(1.5f));
+        
+        
+    }
+    IEnumerator TiempoDeespera(float time) {
+        yield return new WaitForSeconds(time);
+        TiempoHecho();
+        Debug.Log("TiempoDeEspera");
+        Time.timeScale = 0;
     }
 }
 

@@ -119,6 +119,10 @@ public class ManagerEnemi : MonoBehaviour
             }
         }
     }
+    public void Addvelocity(float velocityX, float velocityZ) {
+        _velocity += velocityX;
+        _timeZ -= velocityZ;
+    }
 }
 
    

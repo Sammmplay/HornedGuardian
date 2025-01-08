@@ -75,6 +75,7 @@ public class ControlUi : MonoBehaviour
                 _botonAjuste.gameObject.SetActive(false);
                 _levels.gameObject.SetActive(false);
                 _controlInicioJuego.gameObject.SetActive(false);
+                _congratulations.GetChild(0).gameObject.SetActive(false);
                 break;
             case 2:
                 _panelMaiMenu.gameObject.SetActive(false);
@@ -92,7 +93,7 @@ public class ControlUi : MonoBehaviour
                 _panelInGame.gameObject.SetActive(true);
                 _botonAjuste.gameObject.SetActive(true);
                 _controlInicioJuego.gameObject.SetActive(true);
-
+                _congratulations.GetChild(0).gameObject.SetActive(false);
                 ManagerSounds.Instance.PlayBackgroudnMusic(4);//reproduciendo tomy para musica de fondo
                 break;
             default:
@@ -169,14 +170,26 @@ public class ControlUi : MonoBehaviour
     public void AnimacionBotonNo() {
         LeanTween.move(_confirmacionSalida, new Vector3(0, -780, 0), 0.1f).setIgnoreTimeScale(true).setOnComplete(()=> _confirmacionSalida.gameObject.SetActive(false));
     }
+    public void BotonConfirmacionSalidaSi() {
+        LoadEscena.Instance.LoadEscenaActual(0);
+    }
     public void PauseInGame() {
         if(Time.timeScale == 0) {
             Time.timeScale = 1;
         } else {
             Time.timeScale = 0f;
-        }
-        
+        } 
+    }
+    public void Reintentar() {
+        LoadEscena.Instance.LoadEscenaActual(SceneManager.GetActiveScene().buildIndex);
+    }
 
+    public void NextLevel() {
+        
+        LoadEscena.Instance.LoadEscenaActual(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+    public void CongratulationsBotonNo() {
+        LoadEscena.Instance.LoadEscenaActual(0);
     }
     #endregion
 }

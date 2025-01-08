@@ -10,8 +10,10 @@ public class ControllBall : MonoBehaviour
         _damage = PlayerController.instance._damage;
     }
     private void Update() {
-        transform.position += Vector3.forward * _speed * Time.deltaTime;
-
+        Vector3 _newPosition = transform.position;
+        _newPosition.y = 0f;
+        _newPosition += Vector3.forward * _speed * Time.deltaTime;
+        transform.position = _newPosition;  
     }
 
     private void OnTriggerEnter(Collider other) {
@@ -19,6 +21,7 @@ public class ControllBall : MonoBehaviour
             EnemyController _contacto = other.GetComponent<EnemyController>();
             if (_contacto != null) {
                 _contacto.PerderVida(_damage);
+                
             }
             Destroy(gameObject);
         } else if (other.CompareTag("Bunker")) {

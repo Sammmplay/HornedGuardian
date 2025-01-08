@@ -22,17 +22,12 @@ public class PlayerController : MonoBehaviour
     int _currentPositionIndex;
     [SerializeField] float _limitMinX;
     [SerializeField] float _limitMaxX;
-    [Header("Efecto Destruccion")]
-    [SerializeField] float _explocionForce = 500f;
-    [SerializeField] float _explosionRadius = 2f;
-    [SerializeField] float _upwardModifier = 1f; //Modificador para que las partes salgan hacia arriaba
-
     [SerializeField] bool _onFire = true;
     
     [SerializeField] bool _isFire;
 
     [SerializeField] Vector2 _input;
-
+    bool _canmove = true;
 
     Rigidbody _rb;
     private void Awake() {
@@ -43,6 +38,10 @@ public class PlayerController : MonoBehaviour
 
     }
     private void Start() {
+        Collider _col = GetComponent<Collider>();
+        _col.enabled = true;
+        Light _ligt = GetComponentInChildren<Light>();
+        _ligt.enabled = true;
         _rb = GetComponent<Rigidbody>();
         if (transform.position.y != 0) {
             Vector3 newPosition = transform.position;
@@ -72,6 +71,7 @@ public class PlayerController : MonoBehaviour
         _input = value.Get<Vector2>();
     }
     public void MovimientoPlayer() {
+        if (!_canmove) return;
         float moveX = _input.x * _speed * Time.deltaTime;
 
         Vector2 dir = _rb.position + new Vector3(moveX, 0);
@@ -80,6 +80,7 @@ public class PlayerController : MonoBehaviour
         _rb.MovePosition(dir);
     }
     public void Angleplayer(float input) {
+        if (!_canmove) return;
         float anglecurrent = -90;
         if (input > 0) {
             anglecurrent = _masAngleRotation;
@@ -97,6 +98,7 @@ public class PlayerController : MonoBehaviour
 
     }
     void disparar() {
+        if (!_canmove) return;
         if (_timer > _recollding && _onFire ) {
             Transform _spawPosition = _ballTransform[_currentPositionIndex];
             GameObject _ball = Instantiate(_ballPrefab, _spawPosition.position, Quaternion.identity);
@@ -108,13 +110,22 @@ public class PlayerController : MonoBehaviour
         }
     }
     public void DestructionObject() {
+        _canmove = false;
         _destruction.SetActive(true);
+        Collider _col = GetComponent<Collider>();
+        _col.enabled = false;
         GameManager.Instance.PerderVida();
         if (_efects != null) {
             _efects.SetActive(true);
         }
         AudioSource _sound = GetComponent<AudioSource>();
         _sound.Play();
-        Destroy(gameObject, 0.5f);
+        MeshRenderer _mesh = GetComponent<MeshRenderer>();
+        _mesh.enabled = false;
+        Light _light = gameObject.GetComponentInChildren<Light>();
+        if (_light!=null){
+            _light.enabled = false;
+        }
+        Destroy(gameObject, 2.0f);
     }
 }

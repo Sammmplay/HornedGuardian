@@ -27,6 +27,7 @@ public class LoadEscena : MonoBehaviour
         StartCoroutine(ChanchEscene(index));
     }
     IEnumerator ChanchEscene(int index) {
+        Time.timeScale = 1;
         _backgorund.SetActive(true);
         //Cargar la escena de forma Asyncrona
         AsyncOperation asyncOpetarion = SceneManager.LoadSceneAsync(index);
