@@ -3624,6 +3624,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ballPrefab: {fileID: 6328413644285348393, guid: bab59fdae60031541bc19a01c6184581, type: 3}
+  _explotionPrefab: {fileID: 1234775601138462896, guid: e84c6c0fe07938643a1bdc41b436af46, type: 3}
   _destruction: {fileID: 5278133085584138906}
   _efects: {fileID: 6690292560242920021}
   _ballTransform:
@@ -3635,15 +3636,27 @@ MonoBehaviour:
   _menorAngleRotation: 45
   _angleSpeed: 90
   _timer: 0
+  _timerExplotion: 0
   _recollding: 0.6
+  _recoldingExplotion: 0
+  _timeDestroyThis: 3.5
   _limitMinX: -11
   _limitMaxX: 11
-  _explocionForce: 500
-  _explosionRadius: 2
-  _upwardModifier: 1
   _onFire: 1
   _isFire: 0
+  _isFire2: 0
+  _isFireExplotion: 0
   _input: {x: 0, y: 0}
+  _canmove: 0
+  _originalRecolding: 0
+  _originalMove: 0
+  _durationInvert: 0
+  _endRecolding: 0
+  _endMove: 0
+  _endInvertMove: 0
+  _isEffectActiveFire: 0
+  _isEffectActiveMove: 0
+  _isEffectActiveInvert: 0
 --- !u!82 &8864543527841460393
 AudioSource:
   m_ObjectHideFlags: 0

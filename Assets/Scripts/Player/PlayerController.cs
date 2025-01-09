@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public static PlayerController instance;
 
     [SerializeField] GameObject _ballPrefab;
+    [SerializeField] GameObject _explotionPrefab;
     [SerializeField] GameObject _destruction;
     [SerializeField] GameObject _efects;
     [SerializeField] Transform[] _ballTransform;
@@ -18,13 +19,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float _menorAngleRotation;
     [SerializeField] float _angleSpeed;
     [SerializeField] float _timer;
+    [SerializeField] float _timerExplotion;
     [SerializeField] public float _recollding;
+    [SerializeField] public float _recoldingExplotion;
     [SerializeField] float _timeDestroyThis = 3.5f;
     int _currentPositionIndex;
     [SerializeField] float _limitMinX;
     [SerializeField] float _limitMaxX;
     [SerializeField] bool _onFire = true;
     [SerializeField] bool _isFire;
+    [SerializeField] bool _isFire2;
+    [SerializeField] bool _isFireExplotion;
 
     [SerializeField] Vector2 _input;
     [SerializeField] bool _canmove = false;
@@ -68,6 +73,10 @@ public class PlayerController : MonoBehaviour
         if (_timer  >_recollding) {
             _onFire = true;
         }
+        _timerExplotion += Time.deltaTime;
+        if (_timerExplotion > _recoldingExplotion) {
+            _isFire2 = true;
+        }
         // Comprueba si el efecto activo debe terminar.
         if (_isEffectActiveFire && Time.time >= _endRecolding) {
             _recollding = _originalRecolding; // Restaura la velocidad original.
@@ -79,6 +88,9 @@ public class PlayerController : MonoBehaviour
         }
         if (_isFire) {
             disparar(); ;
+        }
+        if (_isFireExplotion) {
+            DispartoFireExplotion();
         }
         // Comprueba si el efecto de inversión debe terminar.
         if (_isEffectActiveInvert && Time.time >= _endInvertMove) {
@@ -120,8 +132,23 @@ public class PlayerController : MonoBehaviour
     }
 
     public void OnFire(InputValue value) {
-        _isFire = value.Get<float>()>0.5;
+        _isFire = value.Get<float>()>0.5f;
 
+    }
+    public void OnFire1(InputValue inputValue) {
+        _isFireExplotion = inputValue.Get<float>() > 0.5f;
+    }
+    void DispartoFireExplotion() {
+        if (!_canmove) return;
+        if(_timerExplotion> _recoldingExplotion && _isFire2) {
+            Transform _spawPosition = _ballTransform[_currentPositionIndex];
+            GameObject _ball = Instantiate(_explotionPrefab, _spawPosition.position, Quaternion.identity);
+            //alternar entre el indice 0 y 1
+            _currentPositionIndex = (_currentPositionIndex + 1) % _ballTransform.Length;
+            _timerExplotion = 0;
+            _isFire2 = false;
+            Destroy(_ball, 5);
+        }
     }
     void disparar() {
         if (!_canmove) return;

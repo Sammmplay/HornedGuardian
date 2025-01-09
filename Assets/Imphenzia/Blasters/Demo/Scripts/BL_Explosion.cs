@@ -31,4 +31,5 @@ public class BL_Explosion : MonoBehaviour {
                 _rb.AddExplosionForce(power, _explosionPos, radius, upModifier, ForceMode.Impulse);
         }
     }
+
 }

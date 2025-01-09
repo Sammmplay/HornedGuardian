@@ -12,7 +12,7 @@ public class MiniGameSelecPlayer : MonoBehaviour
     [SerializeField] float _recolding;
     [SerializeField] float _time = 0;
     [SerializeField] float _count = 0;
-    [SerializeField] bool _fireAvtive = false;
+    [SerializeField] bool _fireActive = false;
     RectTransform _rect;
     [SerializeField] RectTransform _leftBullet;
     [SerializeField] RectTransform _rigthBullet;
@@ -41,9 +41,9 @@ public class MiniGameSelecPlayer : MonoBehaviour
         MoveBullet();
     }
     public void Disparo() {
-        _fireAvtive = Input.GetButton("Disparo");
+        _fireActive = Input.GetButton("Disparo");
          _time += Time.deltaTime;
-        if (_fireAvtive && _time >= _recolding) {
+        if (_fireActive && _time >= _recolding) {
             FireBullet();
             _time = 0;
             Debug.Log("disparo Activado");

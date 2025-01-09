@@ -57,6 +57,8 @@ public class ControlUi : MonoBehaviour
     }
     private void Start() {
         ActiveObject();
+        Button _iniciarGame = GameObject.Find("Iniciar Juego").GetComponent<Button>();
+        
     }
     public void ActiveObject() {
         if (FindObjectOfType<EventSystem>()) {
