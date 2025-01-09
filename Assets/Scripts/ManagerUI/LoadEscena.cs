@@ -23,9 +23,16 @@ public class LoadEscena : MonoBehaviour
     private void Start() {
         _backgorund.SetActive(false);
     }
+
+    private void Update() {
+        if (SceneManager.GetActiveScene().buildIndex == 0) {
+            Time.timeScale = 1;
+        }
+    }
     public void LoadEscenaActual(int index) {
         StartCoroutine(ChanchEscene(index));
     }
+
     IEnumerator ChanchEscene(int index) {
         Time.timeScale = 1;
         _backgorund.SetActive(true);

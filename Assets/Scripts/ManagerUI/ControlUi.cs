@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -10,10 +12,14 @@ public class ControlUi : MonoBehaviour
     [Tooltip("Todo lo referente a los menus de escen entre 0 1 2 que son los menus de inicio" +
         "principio de escena,seleccion de guardian(Player) y seleccion de escena")]
     public static ControlUi Instance;
+
+    public GameObject _evetSystem;
     public LeanTweenType easeType;
     [Header("Ajuste de Scala Botones")]
     [SerializeField] float _scaleMultiply = 1.3f;
     [SerializeField] float _animationduration;
+
+    
     #region Menu Principal ambas escenas
     [SerializeField] RectTransform _panelMaiMenu;
     [SerializeField] RectTransform _panelOptions;
@@ -53,6 +59,11 @@ public class ControlUi : MonoBehaviour
         ActiveObject();
     }
     public void ActiveObject() {
+        if (FindObjectOfType<EventSystem>()) {
+            Destroy(FindObjectOfType<EventSystem>().gameObject);
+            Instantiate(_evetSystem);
+            ManagerEnemi.Instance._starGame = false;
+        }
         int indexScene = SceneManager.GetActiveScene().buildIndex;
         switch (indexScene) {
             case 0:
@@ -63,9 +74,17 @@ public class ControlUi : MonoBehaviour
                 _levels.gameObject.SetActive(false);
                 _botonAjuste.gameObject.SetActive(false);
                 _controlInicioJuego.gameObject.SetActive(false);
+                GameManager.Instance._cronometro.SetActive(false);
+                GameManager.Instance._endGame.gameObject.SetActive(false);
+                GameManager.Instance._puntuacion.SetActive(false);
+                DisableCanvasInGame();
+                if (FindObjectOfType<PlayerController>()!= null ) {
+                    Destroy(FindObjectOfType<PlayerController>().gameObject);
+                }
                 if (_buttonsImages != null) {
                     AnimacionConLeanTwin();
                 }
+                Time.timeScale = 1.0f;
                 break;
             case 1:
                 //sucesos de entrada para la escena 1(PLayerSelect)
@@ -86,6 +105,7 @@ public class ControlUi : MonoBehaviour
                 _controlInicioJuego.gameObject.SetActive(false);
                 break;
             case >= 3:
+                Time.timeScale = 1.0f;
                 _panelMaiMenu.gameObject.SetActive(false);
                 _panelOptions.gameObject.SetActive(false);
                 _panelSelectPlayer.gameObject.SetActive(false);
@@ -105,6 +125,12 @@ public class ControlUi : MonoBehaviour
             _panelsInGame[i].SetActive(false);
         }
         _panelsInGame[index].SetActive(true);
+    }
+    public void DisableCanvasInGame() {
+        for (int i = 0; i < _panelsInGame.Length; i++) {
+            _panelsInGame[i].SetActive(false);
+        }
+        
     }
     public void AnimacionConLeanTwin() {
         // movimiento del panel principal
@@ -144,16 +170,16 @@ public class ControlUi : MonoBehaviour
     #endregion
     public void AnimacionScaleBotones(GameObject _boton) {
         
-        LeanTween.scale(_boton, Vector3.one * _scaleMultiply, _animationduration);
+        LeanTween.scale(_boton, Vector3.one * _scaleMultiply, _animationduration).setIgnoreTimeScale(true);
     }
     public void RestartScaleBotones(GameObject _boton) {
-        LeanTween.scale(_boton, Vector3.one, _animationduration);
+        LeanTween.scale(_boton, Vector3.one, _animationduration).setIgnoreTimeScale(true);
     }
 
     #region Comienzo De Partida
     public void BotonDefender() {
         ManagerEnemi _scriptEnemi = FindObjectOfType<ManagerEnemi>();
-        if (_scriptEnemi != null) {
+        if (_scriptEnemi != null && SceneManager.GetActiveScene().buildIndex>=3) {
             _scriptEnemi.ComenzarNivel();
         }
     }
@@ -171,7 +197,12 @@ public class ControlUi : MonoBehaviour
         LeanTween.move(_confirmacionSalida, new Vector3(0, -780, 0), 0.1f).setIgnoreTimeScale(true).setOnComplete(()=> _confirmacionSalida.gameObject.SetActive(false));
     }
     public void BotonConfirmacionSalidaSi() {
-        LoadEscena.Instance.LoadEscenaActual(0);
+        LeanTween.move(_confirmacionSalida, new Vector3(0, -780, 0), 0.1f).setIgnoreTimeScale(true).setOnComplete(() => {
+
+            _confirmacionSalida.gameObject.SetActive(false);
+            LoadEscena.Instance.LoadEscenaActual(0);
+        });
+        
     }
     public void PauseInGame() {
         if(Time.timeScale == 0) {
@@ -185,13 +216,15 @@ public class ControlUi : MonoBehaviour
     }
 
     public void NextLevel() {
-        
+        Time.timeScale = 1;
         LoadEscena.Instance.LoadEscenaActual(SceneManager.GetActiveScene().buildIndex + 1);
     }
     public void CongratulationsBotonNo() {
+        Time.timeScale = 1;
         LoadEscena.Instance.LoadEscenaActual(0);
     }
     #endregion
+
 }
 
 

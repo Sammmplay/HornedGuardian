@@ -27,7 +27,10 @@ public class EnemyController : MonoBehaviour {
     [SerializeField] float _upwardModifier = 1f; //Modificador para que las partes salgan hacia arriaba
     public float _puntuacion = 0f;
     [SerializeField] ManagerEnemi _managerEnemy;
-    
+    [Header("Efectos")]
+    [SerializeField] GameObject[] _powerUpsPrefabs;
+    [SerializeField] float _dropChanceMax = 0.3f;
+    [SerializeField] float _dropChanceMin = 0.0f;
     private float _targetZ;
     private void Awake() {
         if (instance == null) {
@@ -114,7 +117,15 @@ public class EnemyController : MonoBehaviour {
             } 
         }
     }
+    public void DropPowerUp() {
+        // Seleccionar un Power-Up aleatorio de la lista
+        int randomIndex = Random.Range(0, _powerUpsPrefabs.Length);
+        // Instanciar el Power-Up en la posición del bloque
+        GameObject _poweUp = Instantiate(_powerUpsPrefabs[randomIndex], transform.position, _powerUpsPrefabs[randomIndex].transform.rotation);
+        _poweUp.transform.SetParent(null);
+    }
     public void DestruccionEfect() {
+        DropPowerUp();
         _destruction.SetActive(true);
         if (_efectsGameObject[0] != null || _efectsGameObject[1] != null ) {
             GameObject _efect1 = Instantiate(_efectsGameObject[0], transform.position, Quaternion.identity);

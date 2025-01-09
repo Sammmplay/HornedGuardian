@@ -18,24 +18,37 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float _menorAngleRotation;
     [SerializeField] float _angleSpeed;
     [SerializeField] float _timer;
-    [SerializeField] float _recollding;
+    [SerializeField] public float _recollding;
+    [SerializeField] float _timeDestroyThis = 3.5f;
     int _currentPositionIndex;
     [SerializeField] float _limitMinX;
     [SerializeField] float _limitMaxX;
     [SerializeField] bool _onFire = true;
-    
     [SerializeField] bool _isFire;
 
     [SerializeField] Vector2 _input;
-    bool _canmove = true;
+    [SerializeField] bool _canmove = false;
+    [Header("PowerUps")]
+    [SerializeField] float _originalRecolding;
+    [SerializeField] float _originalMove;
+    [SerializeField] float _durationInvert;
 
+    [SerializeField] float _endRecolding;
+    [SerializeField] float _endMove;
+    [SerializeField] float _endInvertMove;
+
+
+    [SerializeField] bool _isEffectActiveFire = false;
+    [SerializeField] bool _isEffectActiveMove = false;
+    [SerializeField] bool _isEffectActiveInvert = false;
     Rigidbody _rb;
     private void Awake() {
         if (instance == null) {
             instance = this;
             DontDestroyOnLoad(gameObject);
         } else Destroy(gameObject);
-
+        _originalRecolding = _recollding;
+        _originalMove = _speed;
     }
     private void Start() {
         Collider _col = GetComponent<Collider>();
@@ -55,11 +68,22 @@ public class PlayerController : MonoBehaviour
         if (_timer  >_recollding) {
             _onFire = true;
         }
-        
+        // Comprueba si el efecto activo debe terminar.
+        if (_isEffectActiveFire && Time.time >= _endRecolding) {
+            _recollding = _originalRecolding; // Restaura la velocidad original.
+            _isEffectActiveFire = false;
+        }
+        if (_isEffectActiveMove && Time.time >= _endMove) {
+            _speed = _originalMove; // Restaura la velocidad original.
+            _isEffectActiveMove = false;
+        }
         if (_isFire) {
             disparar(); ;
         }
-        
+        // Comprueba si el efecto de inversión debe terminar.
+        if (_isEffectActiveInvert && Time.time >= _endInvertMove) {
+            _isEffectActiveInvert = false;
+        }
     }
     private void FixedUpdate() {
         MovimientoPlayer();
@@ -72,15 +96,17 @@ public class PlayerController : MonoBehaviour
     }
     public void MovimientoPlayer() {
         if (!_canmove) return;
-        float moveX = _input.x * _speed * Time.deltaTime;
+       
+        float moveX = (_isEffectActiveInvert ? -_input.x : _input.x) * _speed * Time.deltaTime;
 
         Vector2 dir = _rb.position + new Vector3(moveX, 0);
         dir.x = Mathf.Clamp(dir.x, _limitMinX, _limitMaxX);
-
         _rb.MovePosition(dir);
+
     }
     public void Angleplayer(float input) {
         if (!_canmove) return;
+        input = _isEffectActiveInvert ? -input : input;
         float anglecurrent = -90;
         if (input > 0) {
             anglecurrent = _masAngleRotation;
@@ -89,8 +115,8 @@ public class PlayerController : MonoBehaviour
         }else if (input == 0) {
             anglecurrent = 0;
         }
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, anglecurrent), _angleSpeed * Time.fixedDeltaTime);
-        
+        transform.rotation = Quaternion.Lerp(transform.rotation,
+            Quaternion.Euler(0, 0, anglecurrent), _angleSpeed * Time.fixedDeltaTime);
     }
 
     public void OnFire(InputValue value) {
@@ -126,6 +152,41 @@ public class PlayerController : MonoBehaviour
         if (_light!=null){
             _light.enabled = false;
         }
-        Destroy(gameObject, 2.0f);
+        if (GameManager.Instance._lifeCount <= 0) {
+            StartCoroutine(EndGame());
+        }
+        Destroy(gameObject, _timeDestroyThis+0.1f);
+    }
+    IEnumerator EndGame() {
+        yield return new WaitForSeconds(_timeDestroyThis-0.1f);
+        Debug.Log("EndGameInstance");
+        GameManager.Instance.EndGame();
+        Destroy(gameObject);
+    }
+    public void ApplySpeedFire(float newRecolding,float duration) {
+        if (_isEffectActiveFire) {
+            _endRecolding = Time.time + duration;
+            return;
+        }
+        _recollding -= newRecolding;
+        _isEffectActiveFire = true;
+        _endRecolding = Time.time+ duration;
+    }
+    public void ApplyspeedSpeed(float _newVel,float duration) {
+        if (_isEffectActiveMove) {
+            _endMove = Time.time + duration;
+            return;
+        }
+        _speed += _newVel;
+        _isEffectActiveMove = true;
+        _endMove = Time.time + duration;
+    }
+    public void ApplyInverControls(float duration) {
+        _isEffectActiveInvert = true;
+        _durationInvert = Time.time + duration;
+    }
+    public void CanDoIt(bool yes) {
+        _canmove = yes;
+    
     }
 }

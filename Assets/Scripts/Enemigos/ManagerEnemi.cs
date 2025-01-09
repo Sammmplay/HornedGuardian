@@ -27,7 +27,7 @@ public class ManagerEnemi : MonoBehaviour
     [SerializeField] float _distanceZ;
     public float _velocity;
     public float _timeZ;
-    [SerializeField] bool _starGame;
+    [SerializeField]public  bool _starGame;
     [SerializeField] bool _movingToRigth = true;
     [SerializeField] bool _movingInX;
     public bool _movingInZ;

@@ -1169,6 +1169,13 @@ MonoBehaviour:
   _upwardModifier: 1
   _puntuacion: 8
   _managerEnemy: {fileID: 0}
+  _powerUpsPrefabs:
+  - {fileID: 3931298887763117188, guid: fa894b791567f4442815dc87a24698c7, type: 3}
+  - {fileID: 6341388889416235796, guid: 989f2bd4dcfb67345a5e43ee29cba892, type: 3}
+  - {fileID: 7732155490130574340, guid: e3f7c9297621d304191dea8d1b4508af, type: 3}
+  - {fileID: 7324718696415859005, guid: ec14f0f5e1e2751418a23626991fe5e3, type: 3}
+  _dropChanceMax: 1
+  _dropChanceMin: 1
 --- !u!82 &1870392786814355381
 AudioSource:
   m_ObjectHideFlags: 0

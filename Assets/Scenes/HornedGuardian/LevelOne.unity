@@ -130,6 +130,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1619890784}
     m_Modifications:
+    - target: {fileID: 2539790706305576686, guid: 3d291a0407aee6943a320e76c7e9445f, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2539790706305576686, guid: 3d291a0407aee6943a320e76c7e9445f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2539790706305576686, guid: 3d291a0407aee6943a320e76c7e9445f, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2556325827064693222, guid: 3d291a0407aee6943a320e76c7e9445f, type: 3}
       propertyPath: m_Camera
       value: 
